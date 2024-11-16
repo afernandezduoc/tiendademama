@@ -1,1 +1,26 @@
-<p>gestion-productos works!</p>
+<form (ngSubmit)="crearProducto()">
+    <h3>Agregar Nuevo Producto</h3>
+    <label>Nombre:
+      <input type="text" [(ngModel)]="nuevoProducto.nombre" name="nombre">
+    </label>
+    <label>Precio:
+      <input type="number" [(ngModel)]="nuevoProducto.precio" name="precio">
+    </label>
+    <label>Stock:
+      <input type="number" [(ngModel)]="nuevoProducto.stock" name="stock">
+    </label>
+    <button type="submit">Agregar Producto</button>
+  </form>
+  
+  <hr>
+  
+  <h3>Lista de Productos</h3>
+  <div *ngFor="let producto of productos">
+    <p>
+      Nombre: {{ producto.nombre }} <br>
+      Precio: {{ producto.precio }} <br>
+      Stock: {{ producto.stock }} <br>
+      <button (click)="actualizarProducto(producto)">Actualizar</button>
+      <button (click)="eliminarProducto(producto.id)">Eliminar</button>
+    </p>
+  </div>
