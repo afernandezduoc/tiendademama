@@ -1,13 +1,35 @@
-<h2>Registro de Usuarios</h2>
-<form>
-  <label for="nombre">Nombre:</label>
-  <input id="nombre" type="text" />
-
-  <label for="correo">Correo:</label>
-  <input id="correo" type="email" />
-
-  <label for="contrasena">Contraseña:</label>
-  <input id="contrasena" type="password" />
-
-  <button type="submit">Registrarse</button>
-</form>
+<div class="container mt-5">
+  <form (ngSubmit)="registrarUsuario()" class="row g-3">
+    <div class="col-md-6">
+      <label for="nombre" class="form-label">Nombre:</label>
+      <input type="text" id="nombre" [(ngModel)]="nuevoUsuario.nombre" name="nombre" class="form-control" required minlength="3" #nombreInput="ngModel">
+      <div *ngIf="nombreInput.invalid && (nombreInput.dirty || nombreInput.touched)" class="text-danger">
+        El nombre es requerido y debe tener al menos 3 caracteres.
+      </div>
+    </div>
+    <div class="col-md-6">
+      <label for="correo" class="form-label">Correo Electrónico:</label>
+      <input type="email" id="correo" [(ngModel)]="nuevoUsuario.correo" name="correo" class="form-control" required email #correoInput="ngModel">
+      <div *ngIf="correoInput.invalid && (correoInput.dirty || correoInput.touched)" class="text-danger">
+        Ingrese un correo electrónico válido.
+      </div>
+    </div>
+    <div class="col-md-6">
+      <label for="contrasena" class="form-label">Contraseña:</label>
+      <input type="password" id="contrasena" [(ngModel)]="nuevoUsuario.contrasena" name="contrasena" class="form-control" required minlength="8" #contrasenaInput="ngModel">
+      <div *ngIf="contrasenaInput.invalid && (contrasenaInput.dirty || contrasenaInput.touched)" class="text-danger">
+        La contraseña debe tener al menos 8 caracteres.
+      </div>
+    </div>
+    <div class="col-md-6">
+      <label for="confirmarContrasena" class="form-label">Confirmar Contraseña:</label>
+      <input type="password" id="confirmarContrasena" [(ngModel)]="nuevoUsuario.confirmarContrasena" name="confirmarContrasena" class="form-control" required [pattern]="nuevoUsuario.contrasena" #confirmarContrasenaInput="ngModel">
+      <div *ngIf="confirmarContrasenaInput.invalid && (confirmarContrasenaInput.dirty || confirmarContrasenaInput.touched)" class="text-danger">
+        Las contraseñas deben coincidir.
+      </div>
+    </div>
+    <div class="col-12">
+      <button type="submit" class="btn btn-primary" [disabled]="!nombreInput.valid || !correoInput.valid || !contrasenaInput.valid || !confirmarContrasenaInput.valid">Registrar Usuario</button>
+    </div>
+  </form>
+</div>
