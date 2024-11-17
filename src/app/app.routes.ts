@@ -7,6 +7,7 @@ import { LoginComponent } from './login/login.component';
 import { PerfilComponent } from './perfil/perfil.component';
 import { ListadoProductosComponent } from './listado-productos/listado-productos.component';
 import { GestionUsuariosComponent } from './gestion-usuarios/gestion-usuarios.component';
+import { RecuperarContrasenaComponent } from './recuperar-contrasena/recuperar-contrasena.component';
 
 export const routes: Routes = [
   { path: '', component: InicioComponent },
@@ -15,7 +16,8 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'perfil', component: PerfilComponent },
   { path: 'listado-productos', component: ListadoProductosComponent },
-  { path: 'gestion-usuarios', component: GestionUsuariosComponent }
+  { path: 'gestion-usuarios', component: GestionUsuariosComponent },
+  { path: 'recuperar-contrasena', component: RecuperarContrasenaComponent}
 ];
 
 export const appRouting = provideRouter(routes);

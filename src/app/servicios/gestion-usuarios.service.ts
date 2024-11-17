@@ -34,4 +34,9 @@ export class GestionUsuariosService {
   eliminarUsuario(id: number): Observable<any> {
     return this.http.delete(`${this.apiUrl}/${id}`);
   }
+
+  // Método para recuperar la contraseña
+  recuperarContrasena(correo: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/recuperar-contrasena`, { correo });
+  }
 }
