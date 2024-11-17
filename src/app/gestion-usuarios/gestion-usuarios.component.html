@@ -1,1 +1,29 @@
-<p>gestion-usuarios works!</p>
+<form (ngSubmit)="crearUsuario()">
+    <h3>Agregar Nuevo Usuario</h3>
+    <label>Nombre:
+      <input type="text" [(ngModel)]="nuevoUsuario.nombre" name="nombre">
+    </label>
+    <label>Correo:
+      <input type="email" [(ngModel)]="nuevoUsuario.correo" name="correo">
+    </label>
+    <label>Rol:
+      <select [(ngModel)]="nuevoUsuario.rol" name="rol">
+        <option *ngFor="let rol of roles" [value]="rol">{{rol}}</option>
+      </select>
+    </label>
+    <button type="submit">Agregar Usuario</button>
+  </form>
+  
+  <hr>
+  
+  <h3>Lista de Usuarios</h3>
+  <div *ngFor="let usuario of usuarios">
+    <p>
+      Nombre: {{ usuario.nombre }} <br>
+      Correo: {{ usuario.correo }} <br>
+      Rol: {{ usuario.rol }} <br>
+      <button (click)="actualizarUsuario(usuario)">Actualizar</button>
+      <button (click)="eliminarUsuario(usuario.id)">Eliminar</button>
+    </p>
+  </div>
+  
