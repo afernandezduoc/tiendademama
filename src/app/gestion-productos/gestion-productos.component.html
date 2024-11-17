@@ -1,26 +1,40 @@
-<form (ngSubmit)="crearProducto()">
-    <h3>Agregar Nuevo Producto</h3>
-    <label>Nombre:
-      <input type="text" [(ngModel)]="nuevoProducto.nombre" name="nombre">
-    </label>
-    <label>Precio:
-      <input type="number" [(ngModel)]="nuevoProducto.precio" name="precio">
-    </label>
-    <label>Stock:
-      <input type="number" [(ngModel)]="nuevoProducto.stock" name="stock">
-    </label>
-    <button type="submit">Agregar Producto</button>
+<div class="container mt-5">
+  <form (ngSubmit)="crearProducto()" class="row g-3">
+    <div class="col-md-4">
+      <label for="nombre" class="form-label">Nombre:</label>
+      <input type="text" id="nombre" [(ngModel)]="nuevoProducto.nombre" name="nombre" class="form-control" required minlength="3" #nombreInput="ngModel">
+      <div *ngIf="nombreInput.invalid && (nombreInput.dirty || nombreInput.touched)" class="text-danger">
+        El nombre es requerido y debe tener al menos 3 caracteres.
+      </div>
+    </div>
+    <div class="col-md-4">
+      <label for="precio" class="form-label">Precio:</label>
+      <input type="number" id="precio" [(ngModel)]="nuevoProducto.precio" name="precio" class="form-control" required #precioInput="ngModel">
+      <div *ngIf="precioInput.invalid && (precioInput.dirty || precioInput.touched)" class="text-danger">
+        El precio es requerido.
+      </div>
+    </div>
+    <div class="col-md-4">
+      <label for="stock" class="form-label">Stock:</label>
+      <input type="number" id="stock" [(ngModel)]="nuevoProducto.stock" name="stock" class="form-control" required #stockInput="ngModel">
+      <div *ngIf="stockInput.invalid && (stockInput.dirty || stockInput.touched)" class="text-danger">
+        El stock es requerido.
+      </div>
+    </div>
+    <div class="col-12">
+      <button type="submit" class="btn btn-primary" [disabled]="!nombreInput.valid || !precioInput.valid || !stockInput.valid">Agregar Producto</button>
+    </div>
   </form>
   
-  <hr>
+  <hr class="my-4">
   
   <h3>Lista de Productos</h3>
-  <div *ngFor="let producto of productos">
-    <p>
-      Nombre: {{ producto.nombre }} <br>
-      Precio: {{ producto.precio }} <br>
-      Stock: {{ producto.stock }} <br>
-      <button (click)="actualizarProducto(producto)">Actualizar</button>
-      <button (click)="eliminarProducto(producto.id)">Eliminar</button>
-    </p>
+  <div *ngFor="let producto of productos" class="card mb-3">
+    <div class="card-body">
+      <h5 class="card-title">{{ producto.nombre }}</h5>
+      <p class="card-text">Precio: {{ producto.precio }}<br>Stock: {{ producto.stock }}</p>
+      <button (click)="actualizarProducto(producto)" class="btn btn-warning me-2">Actualizar</button>
+      <button (click)="eliminarProducto(producto.id)" class="btn btn-danger">Eliminar</button>
+    </div>
   </div>
+</div>

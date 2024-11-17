@@ -1,29 +1,44 @@
-<form (ngSubmit)="crearUsuario()">
-    <h3>Agregar Nuevo Usuario</h3>
-    <label>Nombre:
-      <input type="text" [(ngModel)]="nuevoUsuario.nombre" name="nombre">
-    </label>
-    <label>Correo:
-      <input type="email" [(ngModel)]="nuevoUsuario.correo" name="correo">
-    </label>
-    <label>Rol:
-      <select [(ngModel)]="nuevoUsuario.rol" name="rol">
-        <option *ngFor="let rol of roles" [value]="rol">{{rol}}</option>
-      </select>
-    </label>
-    <button type="submit">Agregar Usuario</button>
-  </form>
-  
-  <hr>
-  
-  <h3>Lista de Usuarios</h3>
-  <div *ngFor="let usuario of usuarios">
-    <p>
-      Nombre: {{ usuario.nombre }} <br>
-      Correo: {{ usuario.correo }} <br>
-      Rol: {{ usuario.rol }} <br>
-      <button (click)="actualizarUsuario(usuario)">Actualizar</button>
-      <button (click)="eliminarUsuario(usuario.id)">Eliminar</button>
-    </p>
+<div class="container mt-5">
+    <form (ngSubmit)="crearUsuario()" class="row g-3">
+      <div class="col-md-4">
+        <label for="nombre" class="form-label">Nombre:</label>
+        <input type="text" id="nombre" [(ngModel)]="nuevoUsuario.nombre" name="nombre" class="form-control" required minlength="3" #nombreInput="ngModel">
+        <div *ngIf="nombreInput.invalid && (nombreInput.dirty || nombreInput.touched)" class="text-danger">
+          El nombre es requerido y debe tener al menos 3 caracteres.
+        </div>
+      </div>
+      <div class="col-md-4">
+        <label for="correo" class="form-label">Correo Electrónico:</label>
+        <input type="email" id="correo" [(ngModel)]="nuevoUsuario.correo" name="correo" class="form-control" required email #correoInput="ngModel">
+        <div *ngIf="correoInput.invalid && (correoInput.dirty || correoInput.touched)" class="text-danger">
+          Debe proporcionar un correo válido.
+        </div>
+      </div>
+      <div class="col-md-4">
+        <label for="rol" class="form-label">Rol:</label>
+        <select id="rol" [(ngModel)]="nuevoUsuario.rol" name="rol" class="form-control" required #rolInput="ngModel">
+          <option value="">Seleccione un rol</option>
+          <option value="ADMIN">Administrador</option>
+          <option value="USER">Usuario</option>
+        </select>
+        <div *ngIf="rolInput.invalid && (rolInput.dirty || rolInput.touched)" class="text-danger">
+          Debe seleccionar un rol.
+        </div>
+      </div>
+      <div class="col-12">
+        <button type="submit" class="btn btn-primary" [disabled]="!nombreInput.valid || !correoInput.valid || !rolInput.valid">Agregar Usuario</button>
+      </div>
+    </form>
+    
+    <hr class="my-4">
+    
+    <h3>Lista de Usuarios</h3>
+    <div *ngFor="let usuario of usuarios" class="card mb-3">
+      <div class="card-body">
+        <h5 class="card-title">{{ usuario.nombre }}</h5>
+        <p class="card-text">Correo: {{ usuario.correo }}<br>Rol: {{ usuario.rol }}</p>
+        <button (click)="actualizarUsuario(usuario)" class="btn btn-warning me-2">Actualizar</button>
+        <button (click)="eliminarUsuario(usuario.id)" class="btn btn-danger">Eliminar</button>
+      </div>
+    </div>
   </div>
-  
