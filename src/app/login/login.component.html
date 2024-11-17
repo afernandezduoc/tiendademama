@@ -1,17 +1,36 @@
 <div class="container mt-5">
-    <h2>Iniciar Sesión</h2>
-    <form (ngSubmit)="iniciarSesion()">
-      <div class="mb-3">
-        <label for="correo" class="form-label">Correo:</label>
-        <input type="email" id="correo" [(ngModel)]="usuario.correo" name="correo" class="form-control" required>
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-6 col-lg-4">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h2 class="card-title text-center mb-4">Iniciar Sesión</h2>
+          <form (ngSubmit)="iniciarSesion()" class="needs-validation" novalidate>
+            <div class="mb-3">
+              <label for="correo" class="form-label">Correo:</label>
+              <input type="email" id="correo" [(ngModel)]="usuario.correo" name="correo" class="form-control" required #correoInput="ngModel">
+              <div *ngIf="correoInput.invalid && (correoInput.dirty || correoInput.touched)" class="text-danger">
+                El correo es requerido y debe tener un formato válido.
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="contrasena" class="form-label">Contraseña:</label>
+              <input type="password" id="contrasena" [(ngModel)]="usuario.contrasena" name="contrasena" class="form-control" required #contrasenaInput="ngModel">
+              <div *ngIf="contrasenaInput.invalid && (contrasenaInput.dirty || contrasenaInput.touched)" class="text-danger">
+                La contraseña es requerida.
+              </div>
+            </div>
+            <div *ngIf="mensajeError" class="text-danger mb-3">
+              {{ mensajeError }}
+            </div>
+            <div class="d-grid">
+              <button type="submit" class="btn btn-primary btn-block" [disabled]="!correoInput.valid || !contrasenaInput.valid">Iniciar Sesión</button>
+            </div>
+          </form>
+          <div class="text-center mt-3">
+            <a routerLink="/recuperar-contrasena" class="text-decoration-none">¿Olvidaste tu contraseña?</a>
+          </div>
+        </div>
       </div>
-      <div class="mb-3">
-        <label for="contrasena" class="form-label">Contraseña:</label>
-        <input type="password" id="contrasena" [(ngModel)]="usuario.contrasena" name="contrasena" class="form-control" required>
-      </div>
-      <div *ngIf="mensajeError" class="text-danger mb-3">
-        {{ mensajeError }}
-      </div>
-      <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
-    </form>
+    </div>
   </div>
+</div>

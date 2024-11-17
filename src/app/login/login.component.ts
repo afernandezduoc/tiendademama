@@ -1,14 +1,15 @@
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms'; // Importar FormsModule para ngModel
+import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { GestionUsuariosService } from '../servicios/gestion-usuarios.service';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule], // Añadir FormsModule y CommonModule a los imports
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
   usuario = {
@@ -19,21 +20,16 @@ export class LoginComponent {
 
   constructor(private gestionUsuariosService: GestionUsuariosService, private router: Router) {}
 
+  // Método para iniciar sesión
   iniciarSesion(): void {
-    this.gestionUsuariosService.obtenerUsuarios().subscribe(
-      (usuarios) => {
-        const usuarioValido = usuarios.find((u: any) => u.correo === this.usuario.correo && u.contrasena === this.usuario.contrasena);
-        if (usuarioValido) {
-          // Redirigir al usuario al inicio
-          this.router.navigate(['/inicio']);
-        } else {
-          // Mostrar mensaje de error
-          this.mensajeError = 'Correo o contraseña incorrectos';
-        }
+    this.gestionUsuariosService.iniciarSesion(this.usuario.correo, this.usuario.contrasena).subscribe(
+      (data) => {
+        console.log('Inicio de sesión exitoso:', data);
+        this.router.navigate(['/inicio']);
       },
       (error) => {
         console.error('Error al iniciar sesión:', error);
-        this.mensajeError = 'Ha ocurrido un error al intentar iniciar sesión. Inténtelo nuevamente más tarde.';
+        this.mensajeError = 'Correo o contraseña incorrectos';
       }
     );
   }

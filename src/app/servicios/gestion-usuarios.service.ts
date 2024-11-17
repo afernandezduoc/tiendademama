@@ -49,4 +49,9 @@ export class GestionUsuariosService {
   modificarPerfil(perfil: any): Observable<any> {
     return this.http.put(`${this.apiUrl}/perfil`, perfil);
   }
+
+  // Iniciar sesión
+  iniciarSesion(correo: string, contrasena: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/iniciar-sesion`, { correo, contrasena });
+  }
 }
