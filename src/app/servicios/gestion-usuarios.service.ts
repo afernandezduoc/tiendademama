@@ -39,4 +39,14 @@ export class GestionUsuariosService {
   recuperarContrasena(correo: string): Observable<any> {
     return this.http.post(`${this.apiUrl}/recuperar-contrasena`, { correo });
   }
+
+  // Obtener la información del perfil del usuario
+  obtenerPerfil(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/perfil`);
+  }
+
+  // Modificar la información del perfil del usuario
+  modificarPerfil(perfil: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}/perfil`, perfil);
+  }
 }
