@@ -6,7 +6,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class GestionUsuariosService {
-  private apiUrl = 'http://localhost:8081/api/usuarios'; // URL base del backend para gestionar usuarios
+  private apiUrl = 'http://localhost:8081/api/usuarios';
+  private usuarioActual: any = null; 
 
   constructor(private http: HttpClient) {}
 
@@ -50,8 +51,18 @@ export class GestionUsuariosService {
     return this.http.put(`${this.apiUrl}/perfil`, perfil);
   }
 
-  // Iniciar sesión
-  iniciarSesion(correo: string, contrasena: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/iniciar-sesion`, { correo, contrasena });
+  // Método para iniciar sesión
+  iniciarSesion(usuario: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/login`, usuario);
+  }
+
+  // Método para establecer el usuario actual tras el inicio de sesión
+  establecerUsuarioActual(usuario: any): void {
+    this.usuarioActual = usuario;
+  }
+
+  // Método para obtener el usuario actual
+  obtenerUsuarioActual(): any {
+    return this.usuarioActual;
   }
 }

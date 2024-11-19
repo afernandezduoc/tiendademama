@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms'; // Importar FormsModule para ngModel
+import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { GestionUsuariosService } from '../servicios/gestion-usuarios.service';
@@ -7,7 +7,7 @@ import { GestionUsuariosService } from '../servicios/gestion-usuarios.service';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule, CommonModule], // Añadir FormsModule y CommonModule a los imports
+  imports: [FormsModule, CommonModule],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
@@ -20,12 +20,12 @@ export class LoginComponent {
 
   constructor(private gestionUsuariosService: GestionUsuariosService, private router: Router) {}
 
-  // Método para iniciar sesión
   iniciarSesion(): void {
-    this.gestionUsuariosService.iniciarSesion(this.usuario.correo, this.usuario.contrasena).subscribe(
+    this.gestionUsuariosService.iniciarSesion(this.usuario).subscribe(
       (data) => {
+        this.gestionUsuariosService.establecerUsuarioActual(data);
         console.log('Inicio de sesión exitoso:', data);
-        this.router.navigate(['/inicio']);
+        this.router.navigate(['/listado-productos']);
       },
       (error) => {
         console.error('Error al iniciar sesión:', error);

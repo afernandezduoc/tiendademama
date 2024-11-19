@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class GestionProductosService {
-  private apiUrl = 'http://localhost:8080/productos'; // URL base del backend para gestionar productos
+  private apiUrl = 'http://localhost:8080/productos';
 
   constructor(private http: HttpClient) {}
 

@@ -1,1 +1,11 @@
-<p>listado-productos works!</p>
+<div class="container mt-5">
+    <h3>Lista de Productos Disponibles</h3>
+    <div *ngFor="let producto of productos" class="card mb-3">
+      <div class="card-body">
+        <h5 class="card-title">{{ producto.nombre }}</h5>
+        <p class="card-text">Precio: {{ producto.precio }}<br>Stock: {{ producto.stock }}</p>
+        <button (click)="agregarAlCarrito(producto)" class="btn btn-success">Agregar al Carrito</button>
+      </div>
+    </div>
+  </div>
+  
