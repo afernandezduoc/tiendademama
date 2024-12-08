@@ -1,1 +1,57 @@
 /* You can add global styles to this file, and also import other style files */
+:root {
+    --color-rosado-pastel: #FFC0CB;
+    --color-blanco: #FFFFFF;
+    --color-gris-oscuro: #333333;
+    --color-rosa-fucsia: #FF69B4;
+  }
+  
+  body {
+    background-color: var(--color-rosado-pastel);
+    color: var(--color-gris-oscuro);
+    font-family: Arial, sans-serif;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    color: var(--color-gris-oscuro);
+  }
+  
+  .navbar {
+    background-color: var(--color-rosa-fucsia);
+    color: var(--color-blanco);
+  }
+  
+  .navbar .nav-link {
+    color: var(--color-blanco);
+  }
+  
+  .navbar .nav-link:hover {
+    color: var(--color-rosado-pastel);
+  }
+  
+  .btn-primary {
+    background-color: var(--color-rosa-fucsia);
+    border-color: var(--color-rosa-fucsia);
+    color: var(--color-blanco);
+  }
+  
+  .btn-primary:hover {
+    background-color: #FF4080;
+    border-color: #FF4080;
+  }
+  
+  .card {
+    background-color: var(--color-blanco);
+    border: 1px solid var(--color-rosado-pastel);
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card-title {
+    color: var(--color-gris-oscuro);
+  }
+  
+  .card-text {
+    color: var(--color-gris-oscuro);
+  }
+  
