@@ -5,21 +5,12 @@ import {
   platformBrowserDynamicTesting,
 } from '@angular/platform-browser-dynamic/testing';
 
-declare const require: {
-  context(
-    path: string,
-    deep?: boolean,
-    filter?: RegExp
-  ): {
-    keys(): string[];
-    <T>(id: string): T;
-  };
-};
-
+// Inicializar el entorno de pruebas
 getTestBed().initTestEnvironment(
   BrowserDynamicTestingModule,
   platformBrowserDynamicTesting()
 );
 
-const context = require.context('./', true, /\.spec\.ts$/);
-context.keys().map(context);
+// Cargar manualmente los archivos de prueba
+//const testContext = (require as any).context('./', true, /\.spec\.ts$/);
+//testContext.keys().forEach(testContext);

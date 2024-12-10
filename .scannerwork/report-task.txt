@@ -1,0 +1,6 @@
+projectKey=tiendademama
+serverUrl=http://localhost:9000
+serverVersion=24.12.0.100206
+dashboardUrl=http://localhost:9000/dashboard?id=tiendademama
+ceTaskId=c0540b03-75c2-41a9-824a-1259916a2aef
+ceTaskUrl=http://localhost:9000/api/ce/task?id=c0540b03-75c2-41a9-824a-1259916a2aef

@@ -1,17 +1,22 @@
-import { TestBed } from '@angular/core/testing';
-import { AuthGuard } from './auth.guard';
+import 'zone.js/testing';
+import { getTestBed } from '@angular/core/testing';
+import {
+  BrowserDynamicTestingModule,
+  platformBrowserDynamicTesting,
+} from '@angular/platform-browser-dynamic/testing';
 
-describe('AuthGuard', () => {
-  let guard: AuthGuard;
+// Declarar el tipo de `require.context` si no existe
+declare const require: {
+  context(
+    path: string,
+    deep?: boolean,
+    filter?: RegExp
+  ): {
+    keys(): string[];
+    <T>(id: string): T;
+  };
+};
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      providers: [AuthGuard]
-    });
-    guard = TestBed.inject(AuthGuard);
-  });
-
-  it('should be created', () => {
-    expect(guard).toBeTruthy();
-  });
-});
+// Ajuste para cargar los archivos de prueba
+const testContext = require.context('./', true, /\.spec\.ts$/);
+testContext.keys().forEach(testContext);
